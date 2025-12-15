@@ -50,6 +50,36 @@ $classes = $stmt->fetchAll();
             <p class="text-gray-400">Manage your classes, assignments, and student progress</p>
         </div>
         
+        <!-- Quick Access -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Access</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="assignments.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📝</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Assignments</h3>
+                    <p class="text-sm text-gray-400">Create and manage assignments</p>
+                </a>
+                
+                <a href="attendance.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">✓</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Attendance</h3>
+                    <p class="text-sm text-gray-400">Mark student attendance</p>
+                </a>
+                
+                <a href="../messages.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Messages</h3>
+                    <p class="text-sm text-gray-400">Chat with students and parents</p>
+                </a>
+                
+                <a href="../announcements.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📢</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Announcements</h3>
+                    <p class="text-sm text-gray-400">View class announcements</p>
+                </a>
+            </div>
+        </div>
+        
         <!-- My Classes -->
         <div class="mb-8">
             <h2 class="text-xl font-bold text-white mb-4">My Classes</h2>

@@ -66,6 +66,36 @@ $attendance = $stmt->fetch();
             <p class="text-gray-400">Track your assignments, grades, and attendance</p>
         </div>
         
+        <!-- Quick Access -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Access</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="assignments.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📚</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">My Assignments</h3>
+                    <p class="text-sm text-gray-400">View and submit assignments</p>
+                </a>
+                
+                <a href="grades.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">⭐</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">My Grades</h3>
+                    <p class="text-sm text-gray-400">Check your academic progress</p>
+                </a>
+                
+                <a href="../messages.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Messages</h3>
+                    <p class="text-sm text-gray-400">Chat with teachers</p>
+                </a>
+                
+                <a href="../announcements.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📢</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Announcements</h3>
+                    <p class="text-sm text-gray-400">View school notices</p>
+                </a>
+            </div>
+        </div>
+        
         <!-- Stats Grid -->
         <div class="grid md:grid-cols-3 gap-6 mb-8">
             <div class="card">

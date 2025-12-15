@@ -33,69 +33,96 @@ $children = $stmt->fetchAll();
             <p class="text-gray-400">Monitor your children's academic progress</p>
         </div>
         
-        <!-- Children Overview -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <?php foreach ($children as $child): ?>
-            <?php
-                // Get child's stats
-                $stmt = $db->prepare("
-                    SELECT 
-                        COUNT(DISTINCT a.id) as pending_assignments,
-                        COUNT(DISTINCT CASE WHEN asub.marks_obtained IS NOT NULL THEN asub.id END) as graded_assignments,
-                        AVG(CASE WHEN asub.marks_obtained IS NOT NULL THEN (asub.marks_obtained / a.total_marks * 100) END) as avg_grade
-                    FROM assignments a
-                    JOIN student_enrollments se ON a.class_id = se.class_id
-                    LEFT JOIN assignment_submissions asub ON a.id = asub.assignment_id AND asub.student_id = :student_id
-                    WHERE se.student_id = :student_id AND a.deadline >= NOW()
-                ");
-                $stmt->execute(['student_id' => $child['id']]);
-                $stats = $stmt->fetch();
-                
-                // Get attendance
-                $stmt = $db->prepare("
-                    SELECT 
-                        COUNT(*) as total,
-                        SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) as present
-                    FROM attendance
-                    WHERE student_id = :student_id AND date >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-                ");
-                $stmt->execute(['student_id' => $child['id']]);
-                $attendance = $stmt->fetch();
-                $attendanceRate = $attendance['total'] > 0 ? round(($attendance['present'] / $attendance['total']) * 100) : 0;
-            ?>
-            <div class="card">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-1">
-                            <?php echo htmlspecialchars($child['first_name'] . ' ' . $child['last_name']); ?>
-                        </h3>
-                        <p class="text-sm text-gray-400 capitalize"><?php echo htmlspecialchars($child['relationship']); ?></p>
-                    </div>
-                </div>
-                
-                <div class="space-y-3 mb-4">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-400">Pending Assignments</span>
-                        <span class="text-white font-semibold"><?php echo $stats['pending_assignments']; ?></span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-400">Attendance (30 days)</span>
-                        <span class="text-white font-semibold"><?php echo $attendanceRate; ?>%</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-400">Average Grade</span>
-                        <span class="text-white font-semibold">
-                            <?php echo $stats['avg_grade'] ? round($stats['avg_grade'], 1) . '%' : 'N/A'; ?>
-                        </span>
-                    </div>
-                </div>
-                
-                <a href="child-details.php?student_id=<?php echo $child['id']; ?>" 
-                   class="block text-center btn-primary">
-                    View Details
+        <!-- Quick Access -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Access</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="../messages.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Messages</h3>
+                    <p class="text-sm text-gray-400">Chat with teachers</p>
                 </a>
+                
+                <a href="../announcements.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📢</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Announcements</h3>
+                    <p class="text-sm text-gray-400">View school notices</p>
+                </a>
+                
+                <div class="card bg-blue-900/20 border-blue-500/30">
+                    <div class="text-3xl mb-3">👶</div>
+                    <h3 class="text-lg font-semibold text-white mb-1"><?php echo count($children); ?> Children</h3>
+                    <p class="text-sm text-gray-400">Linked to your account</p>
+                </div>
             </div>
-            <?php endforeach; ?>
+        </div>
+        
+        <!-- Children Overview -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">My Children</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <?php foreach ($children as $child): ?>
+                <?php
+                    // Get child's stats
+                    $stmt = $db->prepare("
+                        SELECT 
+                            COUNT(DISTINCT a.id) as pending_assignments,
+                            COUNT(DISTINCT CASE WHEN asub.marks_obtained IS NOT NULL THEN asub.id END) as graded_assignments,
+                            AVG(CASE WHEN asub.marks_obtained IS NOT NULL THEN (asub.marks_obtained / a.total_marks * 100) END) as avg_grade
+                        FROM assignments a
+                        JOIN student_enrollments se ON a.class_id = se.class_id
+                        LEFT JOIN assignment_submissions asub ON a.id = asub.assignment_id AND asub.student_id = :student_id
+                        WHERE se.student_id = :student_id AND a.deadline >= NOW()
+                    ");
+                    $stmt->execute(['student_id' => $child['id']]);
+                    $stats = $stmt->fetch();
+                    
+                    // Get attendance
+                    $stmt = $db->prepare("
+                        SELECT 
+                            COUNT(*) as total,
+                            SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) as present
+                        FROM attendance
+                        WHERE student_id = :student_id AND date >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                    ");
+                    $stmt->execute(['student_id' => $child['id']]);
+                    $attendance = $stmt->fetch();
+                    $attendanceRate = $attendance['total'] > 0 ? round(($attendance['present'] / $attendance['total']) * 100) : 0;
+                ?>
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <?php echo htmlspecialchars($child['first_name'] . ' ' . $child['last_name']); ?>
+                            </h3>
+                            <p class="text-sm text-gray-400 capitalize"><?php echo htmlspecialchars($child['relationship']); ?></p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 mb-4">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Pending Assignments</span>
+                            <span class="text-white font-semibold"><?php echo $stats['pending_assignments']; ?></span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Attendance (30 days)</span>
+                            <span class="text-white font-semibold"><?php echo $attendanceRate; ?>%</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Average Grade</span>
+                            <span class="text-white font-semibold">
+                                <?php echo $stats['avg_grade'] ? round($stats['avg_grade'], 1) . '%' : 'N/A'; ?>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <a href="child-details.php?student_id=<?php echo $child['id']; ?>" 
+                       class="block text-center btn-primary">
+                        View Details
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </body>

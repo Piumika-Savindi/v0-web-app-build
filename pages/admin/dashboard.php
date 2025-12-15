@@ -38,6 +38,36 @@ $recentUsers = $stmt->fetchAll();
             <p class="text-gray-400">Manage users, classes, and system configuration</p>
         </div>
         
+        <!-- Quick Access -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Access</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="users.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">👥</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Manage Users</h3>
+                    <p class="text-sm text-gray-400">Add and manage all users</p>
+                </a>
+                
+                <a href="classes.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">🏫</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Manage Classes</h3>
+                    <p class="text-sm text-gray-400">Organize classes and subjects</p>
+                </a>
+                
+                <a href="../messages.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Messages</h3>
+                    <p class="text-sm text-gray-400">Communicate with staff</p>
+                </a>
+                
+                <a href="../announcements.php" class="card hover:border-blue-500/50 transition-all cursor-pointer">
+                    <div class="text-3xl mb-3">📢</div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Announcements</h3>
+                    <p class="text-sm text-gray-400">Post system-wide notices</p>
+                </a>
+            </div>
+        </div>
+        
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="card">

@@ -20,25 +20,25 @@ $basePath = str_repeat('../', $depth);
                         <a href="<?php echo $basePath; ?>pages/admin/dashboard.php" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
                         <a href="<?php echo $basePath; ?>pages/admin/users.php" class="text-gray-300 hover:text-white transition-colors">Users</a>
                         <a href="<?php echo $basePath; ?>pages/admin/classes.php" class="text-gray-300 hover:text-white transition-colors">Classes</a>
+                        <a href="<?php echo $basePath; ?>pages/messages.php" class="text-gray-300 hover:text-white transition-colors">Messages</a>
+                        <a href="<?php echo $basePath; ?>pages/announcements.php" class="text-gray-300 hover:text-white transition-colors">Announcements</a>
                     <?php elseif ($user['role'] === 'teacher'): ?>
                         <a href="<?php echo $basePath; ?>pages/teacher/dashboard.php" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
                         <a href="<?php echo $basePath; ?>pages/teacher/assignments.php" class="text-gray-300 hover:text-white transition-colors">Assignments</a>
-                        <a href="<?php echo $basePath; ?>pages/teacher/tests.php" class="text-gray-300 hover:text-white transition-colors">Tests</a>
                         <a href="<?php echo $basePath; ?>pages/teacher/attendance.php" class="text-gray-300 hover:text-white transition-colors">Attendance</a>
+                        <a href="<?php echo $basePath; ?>pages/messages.php" class="text-gray-300 hover:text-white transition-colors">Messages</a>
+                        <a href="<?php echo $basePath; ?>pages/announcements.php" class="text-gray-300 hover:text-white transition-colors">Announcements</a>
                     <?php elseif ($user['role'] === 'student'): ?>
                         <a href="<?php echo $basePath; ?>pages/student/dashboard.php" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
                         <a href="<?php echo $basePath; ?>pages/student/assignments.php" class="text-gray-300 hover:text-white transition-colors">Assignments</a>
-                        <a href="<?php echo $basePath; ?>pages/student/tests.php" class="text-gray-300 hover:text-white transition-colors">Tests</a>
                         <a href="<?php echo $basePath; ?>pages/student/grades.php" class="text-gray-300 hover:text-white transition-colors">Grades</a>
+                        <a href="<?php echo $basePath; ?>pages/messages.php" class="text-gray-300 hover:text-white transition-colors">Messages</a>
+                        <a href="<?php echo $basePath; ?>pages/announcements.php" class="text-gray-300 hover:text-white transition-colors">Announcements</a>
                     <?php elseif ($user['role'] === 'parent'): ?>
                         <a href="<?php echo $basePath; ?>pages/parent/dashboard.php" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
-                        <a href="<?php echo $basePath; ?>pages/parent/children.php" class="text-gray-300 hover:text-white transition-colors">Children</a>
+                        <a href="<?php echo $basePath; ?>pages/messages.php" class="text-gray-300 hover:text-white transition-colors">Messages</a>
+                        <a href="<?php echo $basePath; ?>pages/announcements.php" class="text-gray-300 hover:text-white transition-colors">Announcements</a>
                     <?php endif; ?>
-                    
-                    <!-- Added common navigation items for all roles -->
-                    <a href="<?php echo $basePath; ?>pages/messages.php" class="text-gray-300 hover:text-white transition-colors">Messages</a>
-                    <a href="<?php echo $basePath; ?>pages/announcements.php" class="text-gray-300 hover:text-white transition-colors">Announcements</a>
-                    <!-- </CHANGE> -->
                 </div>
                 <?php endif; ?>
             </div>
