@@ -17,7 +17,8 @@ $stmt->execute(['parent_id' => $user['id'], 'student_id' => $studentId]);
 $child = $stmt->fetch();
 
 if (!$child) {
-    redirect('/pages/parent/dashboard.php');
+    header('Location: dashboard.php');
+    exit;
 }
 
 // Get recent grades
@@ -77,7 +78,8 @@ $upcomingAssignments = $stmt->fetchAll();
     <?php include '../../components/header.php'; ?>
     
     <div class="container mx-auto px-4 py-8">
-        <a href="/pages/parent/dashboard.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
+        <!-- Fixed back link to use relative path -->
+        <a href="dashboard.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
         
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-white mb-2">

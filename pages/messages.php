@@ -186,7 +186,7 @@ $stmt->execute(['user_id' => $user['id']]);
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/messages/send.php', {
+                const response = await fetch('../api/messages/send.php', {
                     method: 'POST',
                     body: formData
                 });

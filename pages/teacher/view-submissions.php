@@ -18,7 +18,8 @@ $stmt->execute(['id' => $assignmentId, 'teacher_id' => $user['id']]);
 $assignment = $stmt->fetch();
 
 if (!$assignment) {
-    redirect('/pages/teacher/assignments.php');
+    header('Location: assignments.php');
+    exit;
 }
 
 // Get submissions
@@ -46,7 +47,8 @@ $submissions = $stmt->fetchAll();
     
     <div class="container mx-auto px-4 py-8">
         <div class="mb-8">
-            <a href="/pages/teacher/assignments.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Assignments</a>
+            <!-- Fixed back link to use relative path -->
+            <a href="assignments.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Assignments</a>
             <h1 class="text-3xl font-bold text-white mb-2"><?php echo htmlspecialchars($assignment['title']); ?></h1>
             <p class="text-gray-400"><?php echo htmlspecialchars($assignment['class_name'] . ' - ' . $assignment['subject_name']); ?></p>
         </div>
@@ -147,7 +149,7 @@ $submissions = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/teacher/grade-submission.php', {
+                const response = await fetch('../../api/teacher/grade-submission.php', {
                     method: 'POST',
                     body: formData
                 });

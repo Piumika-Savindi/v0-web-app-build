@@ -19,14 +19,16 @@ $stmt->execute(['id' => $assignmentId, 'student_id' => $user['id']]);
 $assignment = $stmt->fetch();
 
 if (!$assignment) {
-    redirect('/pages/student/assignments.php');
+    header('Location: assignments.php');
+    exit;
 }
 
 // Check if already submitted
 $stmt = $db->prepare("SELECT id FROM assignment_submissions WHERE assignment_id = :assignment_id AND student_id = :student_id");
 $stmt->execute(['assignment_id' => $assignmentId, 'student_id' => $user['id']]);
 if ($stmt->fetch()) {
-    redirect('/pages/student/assignments.php');
+    header('Location: assignments.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -43,7 +45,8 @@ if ($stmt->fetch()) {
     
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-3xl mx-auto">
-            <a href="/pages/student/assignments.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Assignments</a>
+            <!-- Fixed back link to use relative path -->
+            <a href="assignments.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Assignments</a>
             
             <div class="card mb-6">
                 <h1 class="text-2xl font-bold text-white mb-4"><?php echo htmlspecialchars($assignment['title']); ?></h1>
@@ -87,7 +90,7 @@ if ($stmt->fetch()) {
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/student/submit-assignment.php', {
+                const response = await fetch('../../api/student/submit-assignment.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -95,7 +98,7 @@ if ($stmt->fetch()) {
                 
                 if (data.success) {
                     alert('Assignment submitted successfully');
-                    window.location.href = '/pages/student/assignments.php';
+                    window.location.href = 'assignments.php';
                 } else {
                     alert(data.message || 'Failed to submit assignment');
                 }

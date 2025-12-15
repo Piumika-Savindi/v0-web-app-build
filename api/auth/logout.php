@@ -2,5 +2,6 @@
 require_once '../../config/init.php';
 
 session_destroy();
-redirect('/index.php');
+header('Location: ../../index.php');
+exit();
 ?>

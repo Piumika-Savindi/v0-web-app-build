@@ -94,7 +94,8 @@ $attendance = $stmt->fetch();
             <div class="card">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-xl font-bold text-white">Pending Assignments</h2>
-                    <a href="/pages/student/assignments.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
+                    <!-- Fixed navigation link to be relative -->
+                    <a href="assignments.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
                 </div>
                 
                 <?php if (empty($pendingAssignments)): ?>
@@ -110,7 +111,8 @@ $attendance = $stmt->fetch();
                                     Due: <?php echo date('M d, Y', strtotime($assignment['deadline'])); ?>
                                 </span>
                                 <?php if (!$assignment['submission_id']): ?>
-                                    <a href="/pages/student/submit-assignment.php?id=<?php echo $assignment['id']; ?>" 
+                                    <!-- Fixed navigation link to be relative -->
+                                    <a href="submit-assignment.php?id=<?php echo $assignment['id']; ?>" 
                                        class="text-sm text-blue-400 hover:text-blue-300">
                                         Submit
                                     </a>
@@ -128,7 +130,8 @@ $attendance = $stmt->fetch();
             <div class="card">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-xl font-bold text-white">Recent Grades</h2>
-                    <a href="/pages/student/grades.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
+                    <!-- Fixed navigation link to be relative -->
+                    <a href="grades.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
                 </div>
                 
                 <?php if (empty($recentGrades)): ?>

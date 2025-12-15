@@ -90,7 +90,7 @@ $children = $stmt->fetchAll();
                     </div>
                 </div>
                 
-                <a href="/pages/parent/child-details.php?student_id=<?php echo $child['id']; ?>" 
+                <a href="child-details.php?student_id=<?php echo $child['id']; ?>" 
                    class="block text-center btn-primary">
                     View Details
                 </a>

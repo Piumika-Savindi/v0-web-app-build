@@ -19,7 +19,8 @@ $stmt->execute(['teacher_id' => $user['id'], 'class_id' => $classId]);
 $class = $stmt->fetch();
 
 if (!$class) {
-    redirect('/pages/teacher/dashboard.php');
+    header('Location: dashboard.php');
+    exit;
 }
 
 // Get students in class
@@ -49,7 +50,7 @@ $today = date('Y-m-d');
     
     <div class="container mx-auto px-4 py-8">
         <div class="mb-8">
-            <a href="/pages/teacher/dashboard.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
+            <a href="dashboard.php" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
             <h1 class="text-3xl font-bold text-white mb-2">Mark Attendance</h1>
             <p class="text-gray-400"><?php echo htmlspecialchars($class['name'] . ' - ' . $class['subject_name']); ?></p>
             <p class="text-gray-400">Date: <?php echo date('F d, Y'); ?></p>
@@ -101,7 +102,7 @@ $today = date('Y-m-d');
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/teacher/mark-attendance.php', {
+                const response = await fetch('../../api/teacher/mark-attendance.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -109,7 +110,7 @@ $today = date('Y-m-d');
                 
                 if (data.success) {
                     alert('Attendance marked successfully');
-                    window.location.href = '/pages/teacher/dashboard.php';
+                    window.location.href = 'dashboard.php';
                 } else {
                     alert(data.message || 'Failed to mark attendance');
                 }

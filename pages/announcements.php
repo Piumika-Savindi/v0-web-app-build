@@ -131,7 +131,7 @@ $announcements = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/announcements/create.php', {
+                const response = await fetch('../api/announcements/create.php', {
                     method: 'POST',
                     body: formData
                 });
