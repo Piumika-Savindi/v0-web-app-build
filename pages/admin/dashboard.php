@@ -107,7 +107,8 @@ $recentUsers = $stmt->fetchAll();
         <div class="card">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-bold text-white">Recent Users</h2>
-                <a href="../../pages/admin/users.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
+                <!-- Fixed path to users page using relative path -->
+                <a href="users.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
             </div>
             
             <div class="overflow-x-auto">
