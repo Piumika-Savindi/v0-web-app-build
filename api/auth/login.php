@@ -17,6 +17,11 @@ if (empty($username) || empty($password)) {
 }
 
 try {
+    if (!isset($db)) {
+        echo json_encode(['success' => false, 'message' => 'Database connection failed']);
+        exit;
+    }
+    
     // Find user by username or email
     $stmt = $db->prepare("
         SELECT id, email, username, password, first_name, last_name, role, is_active 
@@ -61,7 +66,11 @@ try {
         'redirect' => $redirects[$user['role']]
     ]);
     
+} catch (PDOException $e) {
+    error_log("Login error: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'An error occurred']);
+    error_log("Login error: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
 }
 ?>
