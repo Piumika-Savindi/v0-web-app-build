@@ -46,7 +46,6 @@ $basePath = str_repeat('../', $depth);
             <?php if ($user): ?>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <!-- Updated avatar styling to match design -->
                     <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">
                         <?php echo strtoupper(substr($user['first_name'], 0, 1)); ?>
                     </div>
@@ -55,21 +54,12 @@ $basePath = str_repeat('../', $depth);
                         <div class="text-xs text-gray-400 capitalize"><?php echo htmlspecialchars($user['role']); ?></div>
                     </div>
                 </div>
-                <!-- Updated logout button styling to match design with better contrast -->
-                <button onclick="handleLogout()" class="px-5 py-2 text-sm font-medium text-white bg-transparent border border-gray-600 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-all duration-200">
+                <!-- Made logout immediate without confirmation -->
+                <a href="<?php echo $basePath; ?>api/auth/logout.php" class="px-5 py-2 text-sm font-medium text-white bg-transparent border border-gray-600 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-all duration-200">
                     Logout
-                </button>
+                </a>
             </div>
             <?php endif; ?>
         </div>
     </div>
 </nav>
-
-<!-- Added JavaScript logout handler -->
-<script>
-function handleLogout() {
-    if (confirm('Are you sure you want to logout?')) {
-        window.location.href = '<?php echo $basePath; ?>api/auth/logout.php';
-    }
-}
-</script>

@@ -14,7 +14,11 @@ if (isset($_COOKIE[session_name()])) {
 // Destroy the session
 session_destroy();
 
+$currentPath = $_SERVER['SCRIPT_NAME'];
+$depth = substr_count($currentPath, '/') - 1;
+$redirectPath = str_repeat('../', $depth) . 'index.php';
+
 // Redirect to login page
-header('Location: ../../index.php');
+header('Location: ' . $redirectPath);
 exit();
 ?>
