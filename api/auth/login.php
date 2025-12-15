@@ -26,9 +26,12 @@ try {
     $stmt = $db->prepare("
         SELECT id, email, username, password, first_name, last_name, role, is_active 
         FROM users 
-        WHERE (username = :username OR email = :username) AND is_active = 1
+        WHERE (username = :username OR email = :email) AND is_active = 1
     ");
-    $stmt->execute(['username' => $username]);
+    $stmt->execute([
+        'username' => $username,
+        'email' => $username
+    ]);
     $user = $stmt->fetch();
     
     if (!$user) {
