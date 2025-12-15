@@ -4,7 +4,6 @@ require_once '../components/protect.php';
 
 $user = getCurrentUser();
 
-// Get all messages (sent and received)
 $stmt = $db->prepare("
     SELECT m.*, 
            sender.first_name as sender_first, sender.last_name as sender_last, sender.role as sender_role,
@@ -12,10 +11,10 @@ $stmt = $db->prepare("
     FROM messages m
     JOIN users sender ON m.sender_id = sender.id
     JOIN users recipient ON m.recipient_id = recipient.id
-    WHERE m.sender_id = :user_id OR m.recipient_id = :user_id
+    WHERE m.sender_id = :user_id1 OR m.recipient_id = :user_id2
     ORDER BY m.sent_at DESC
 ");
-$stmt->execute(['user_id' => $user['id']]);
+$stmt->execute(['user_id1' => $user['id'], 'user_id2' => $user['id']]);
 $messages = $stmt->fetchAll();
 
 // Get users who can be messaged (role-specific)
