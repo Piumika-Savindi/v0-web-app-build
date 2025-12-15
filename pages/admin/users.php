@@ -70,8 +70,12 @@ $users = $stmt->fetchAll();
                                     <?php echo $user['is_active'] ? 'Disable' : 'Enable'; ?>
                                 </button>
                                 <button onclick="editUser(<?php echo $user['id']; ?>)" 
-                                        class="text-sm text-yellow-400 hover:text-yellow-300">
+                                        class="text-sm text-yellow-400 hover:text-yellow-300 mr-3">
                                     Edit
+                                </button>
+                                <button onclick="deleteUser(<?php echo $user['id']; ?>)" 
+                                        class="text-sm text-red-400 hover:text-red-300">
+                                    Delete
                                 </button>
                             </td>
                         </tr>
@@ -79,6 +83,45 @@ $users = $stmt->fetchAll();
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
+            <h2 class="text-xl font-bold text-white mb-4">Edit User</h2>
+            <form id="editUserForm">
+                <input type="hidden" name="user_id" id="editUserId">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+                    <input type="text" name="first_name" id="editFirstName" required class="w-full px-4 py-2 rounded-lg bg-black border border-gray-700 text-white focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
+                    <input type="text" name="last_name" id="editLastName" required class="w-full px-4 py-2 rounded-lg bg-black border border-gray-700 text-white focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                    <input type="email" name="email" id="editEmail" required class="w-full px-4 py-2 rounded-lg bg-black border border-gray-700 text-white focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+                    <input type="text" name="username" id="editUsername" required class="w-full px-4 py-2 rounded-lg bg-black border border-gray-700 text-white focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Role</label>
+                    <select name="role" id="editRole" required class="w-full px-4 py-2 rounded-lg bg-black border border-gray-700 text-white focus:border-blue-500 focus:outline-none">
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
+                        <option value="parent">Parent</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 btn-primary">Update User</button>
+                    <button type="button" onclick="hideEditUserModal()" class="flex-1 px-4 py-2 text-gray-300 border border-gray-700 rounded-lg hover:border-gray-600">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -171,6 +214,75 @@ $users = $stmt->fetchAll();
                     location.reload();
                 } else {
                     alert(data.message || 'Failed to update status');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        }
+        
+        async function editUser(userId) {
+            try {
+                const response = await fetch(`../../api/admin/get-user.php?user_id=${userId}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('editUserId').value = data.user.id;
+                    document.getElementById('editFirstName').value = data.user.first_name;
+                    document.getElementById('editLastName').value = data.user.last_name;
+                    document.getElementById('editEmail').value = data.user.email;
+                    document.getElementById('editUsername').value = data.user.username;
+                    document.getElementById('editRole').value = data.user.role;
+                    document.getElementById('editUserModal').classList.remove('hidden');
+                } else {
+                    alert('Failed to load user data');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        }
+        
+        function hideEditUserModal() {
+            document.getElementById('editUserModal').classList.add('hidden');
+        }
+        
+        document.getElementById('editUserForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('../../api/admin/edit-user.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('User updated successfully');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to update user');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        });
+        
+        async function deleteUser(userId) {
+            if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) return;
+            
+            try {
+                const response = await fetch('../../api/admin/delete-user.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({user_id: userId})
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('User deleted successfully');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to delete user');
                 }
             } catch (error) {
                 alert('An error occurred');

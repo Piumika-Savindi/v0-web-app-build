@@ -67,10 +67,16 @@ $assignments = $stmt->fetchAll();
                             <span><?php echo $assignment['submission_count']; ?> submissions</span>
                         </div>
                     </div>
-                    <a href="view-submissions.php?assignment_id=<?php echo $assignment['id']; ?>" 
-                       class="btn-primary">
-                        View Submissions
-                    </a>
+                    <div class="flex gap-2">
+                        <a href="view-submissions.php?assignment_id=<?php echo $assignment['id']; ?>" 
+                           class="btn-primary">
+                            View Submissions
+                        </a>
+                        <button onclick="deleteAssignment(<?php echo $assignment['id']; ?>)" 
+                                class="px-4 py-2 text-red-400 border border-red-800 rounded-lg hover:bg-red-900/20">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -163,6 +169,28 @@ $assignments = $stmt->fetchAll();
                 alert('An error occurred');
             }
         });
+        
+        async function deleteAssignment(assignmentId) {
+            if (!confirm('Are you sure you want to delete this assignment? All submissions will also be deleted.')) return;
+            
+            try {
+                const response = await fetch('../../api/teacher/delete-assignment.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({assignment_id: assignmentId})
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Assignment deleted successfully');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to delete assignment');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        }
     </script>
 </body>
 </html>

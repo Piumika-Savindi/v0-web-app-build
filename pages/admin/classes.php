@@ -54,6 +54,11 @@ $subjects = $stmt->fetchAll();
                 <div class="text-sm text-gray-400">
                     <?php echo $class['student_count']; ?> Students
                 </div>
+                <!-- Added delete button for classes -->
+                <button onclick="deleteClass(<?php echo $class['id']; ?>)" 
+                        class="text-sm text-red-400 hover:text-red-300">
+                    Delete
+                </button>
             </div>
             <?php endforeach; ?>
         </div>
@@ -68,6 +73,8 @@ $subjects = $stmt->fetchAll();
                             <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">Code</th>
                             <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">Name</th>
                             <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">Description</th>
+                            <!-- Added actions column -->
+                            <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,6 +83,13 @@ $subjects = $stmt->fetchAll();
                             <td class="py-3 px-4 text-sm text-gray-400"><?php echo htmlspecialchars($subject['code']); ?></td>
                             <td class="py-3 px-4 text-sm text-white"><?php echo htmlspecialchars($subject['name']); ?></td>
                             <td class="py-3 px-4 text-sm text-gray-400"><?php echo htmlspecialchars($subject['description']); ?></td>
+                            <td class="py-3 px-4">
+                                <!-- Added delete button for subjects -->
+                                <button onclick="deleteSubject(<?php echo $subject['id']; ?>)" 
+                                        class="text-sm text-red-400 hover:text-red-300">
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -190,6 +204,50 @@ $subjects = $stmt->fetchAll();
                 alert('An error occurred');
             }
         });
+        
+        async function deleteClass(classId) {
+            if (!confirm('Are you sure you want to delete this class? This will also remove all related data.')) return;
+            
+            try {
+                const response = await fetch('../../api/admin/delete-class.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({class_id: classId})
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Class deleted successfully');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to delete class');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        }
+        
+        async function deleteSubject(subjectId) {
+            if (!confirm('Are you sure you want to delete this subject?')) return;
+            
+            try {
+                const response = await fetch('../../api/admin/delete-subject.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({subject_id: subjectId})
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Subject deleted successfully');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to delete subject');
+                }
+            } catch (error) {
+                alert('An error occurred');
+            }
+        }
     </script>
 </body>
 </html>
