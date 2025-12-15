@@ -1,0 +1,31 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Set the default directory index
+DirectoryIndex index.php
+
+# Force HTTPS (optional, comment out if not using SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Protect config and script files
+<FilesMatch "^(config|scripts)/">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Enable error documents
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 500 /index.php
+
+# Prevent directory listing
+Options -Indexes
+
+# Set PHP settings
+<IfModule mod_php8.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
