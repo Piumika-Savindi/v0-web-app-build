@@ -68,7 +68,7 @@ $assignments = $stmt->fetchAll();
                                 Overdue
                             </span>
                         <?php else: ?>
-                            <a href="/pages/student/submit-assignment.php?id=<?php echo $assignment['id']; ?>" 
+                            <a href="../../pages/student/submit-assignment.php?id=<?php echo $assignment['id']; ?>" 
                                class="btn-primary">
                                 Submit Assignment
                             </a>

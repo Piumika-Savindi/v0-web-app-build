@@ -57,10 +57,10 @@ try {
     ];
     
     $redirects = [
-        'admin' => '../../pages/admin/dashboard.php',
-        'teacher' => '../../pages/teacher/dashboard.php',
-        'student' => '../../pages/student/dashboard.php',
-        'parent' => '../../pages/parent/dashboard.php'
+        'admin' => 'pages/admin/dashboard.php',
+        'teacher' => 'pages/teacher/dashboard.php',
+        'student' => 'pages/student/dashboard.php',
+        'parent' => 'pages/parent/dashboard.php'
     ];
     
     echo json_encode([

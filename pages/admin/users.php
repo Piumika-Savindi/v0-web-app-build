@@ -139,7 +139,7 @@ $users = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/admin/create-user.php', {
+                const response = await fetch('../../api/admin/create-user.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -160,7 +160,7 @@ $users = $stmt->fetchAll();
             if (!confirm('Are you sure you want to change this user\'s status?')) return;
             
             try {
-                const response = await fetch('/api/admin/toggle-user-status.php', {
+                const response = await fetch('../../api/admin/toggle-user-status.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({user_id: userId, is_active: !currentStatus})

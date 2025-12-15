@@ -152,7 +152,7 @@ $subjects = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/admin/create-class.php', {
+                const response = await fetch('../../api/admin/create-class.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -174,7 +174,7 @@ $subjects = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/admin/create-subject.php', {
+                const response = await fetch('../../api/admin/create-subject.php', {
                     method: 'POST',
                     body: formData
                 });

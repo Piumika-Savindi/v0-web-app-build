@@ -67,7 +67,7 @@ $assignments = $stmt->fetchAll();
                             <span><?php echo $assignment['submission_count']; ?> submissions</span>
                         </div>
                     </div>
-                    <a href="/pages/teacher/view-submissions.php?assignment_id=<?php echo $assignment['id']; ?>" 
+                    <a href="../../pages/teacher/view-submissions.php?assignment_id=<?php echo $assignment['id']; ?>" 
                        class="btn-primary">
                         View Submissions
                     </a>
@@ -147,7 +147,7 @@ $assignments = $stmt->fetchAll();
             const formData = new FormData(this);
             
             try {
-                const response = await fetch('/api/teacher/create-assignment.php', {
+                const response = await fetch('../../api/teacher/create-assignment.php', {
                     method: 'POST',
                     body: formData
                 });

@@ -59,7 +59,7 @@ $classes = $stmt->fetchAll();
                     <h3 class="text-lg font-bold text-white mb-2"><?php echo htmlspecialchars($class['name']); ?></h3>
                     <p class="text-sm text-gray-400 mb-4"><?php echo htmlspecialchars($class['subject_name']); ?></p>
                     <div class="flex gap-2">
-                        <a href="/pages/teacher/attendance.php?class_id=<?php echo $class['id']; ?>" class="text-sm text-blue-400 hover:text-blue-300">
+                        <a href="../../pages/teacher/attendance.php?class_id=<?php echo $class['id']; ?>" class="text-sm text-blue-400 hover:text-blue-300">
                             Mark Attendance
                         </a>
                     </div>
@@ -72,7 +72,7 @@ $classes = $stmt->fetchAll();
         <div class="card">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-bold text-white">Recent Assignments</h2>
-                <a href="/pages/teacher/assignments.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
+                <a href="../../pages/teacher/assignments.php" class="text-sm text-blue-400 hover:text-blue-300">View All</a>
             </div>
             
             <?php if (empty($recentAssignments)): ?>
