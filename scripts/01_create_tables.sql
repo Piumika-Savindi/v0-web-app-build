@@ -1,5 +1,8 @@
 -- School Management System Database Schema
 
+-- Added USE statement at the beginning
+USE school_management;
+
 -- Users Table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,

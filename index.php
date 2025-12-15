@@ -159,6 +159,14 @@
                     <div class="mt-6 text-center">
                         <a href="#" class="text-sm text-blue-400 hover:text-blue-300">Forgot password?</a>
                     </div>
+                    
+                    <!-- Added registration link -->
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-400">
+                            Don't have an account? 
+                            <a href="register.php" class="text-blue-400 hover:text-blue-300 font-medium">Register here</a>
+                        </p>
+                    </div>
                 </div>
                 
                 <!-- Demo Credentials -->

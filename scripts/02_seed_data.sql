@@ -1,5 +1,7 @@
 -- Seed Data for School Management System
 
+USE school_management;
+
 -- Insert Admin User
 INSERT INTO users (email, username, password, first_name, last_name, role) VALUES
 ('admin@school.edu', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'System', 'Administrator', 'admin');
