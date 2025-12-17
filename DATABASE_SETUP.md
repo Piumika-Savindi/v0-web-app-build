@@ -8,26 +8,26 @@
 
 ### 1. Create Database
 Run the following script to create the database:
-\`\`\`bash
+```bash
 mysql -u root -p < scripts/00_create_database.sql
-\`\`\`
+```
 
 ### 2. Create Tables
 Run the following script to create all required tables:
-\`\`\`bash
+```bash
 mysql -u root -p < scripts/01_create_tables.sql
-\`\`\`
+```
 
 ### 3. Insert Sample Data
 Run the following script to populate the database with sample data:
-\`\`\`bash
+```bash
 mysql -u root -p < scripts/02_seed_data.sql
-\`\`\`
+```
 
 ## Alternative: Run All Scripts at Once
-\`\`\`bash
+```bash
 cat scripts/*.sql | mysql -u root -p
-\`\`\`
+```
 
 ## Demo Login Credentials
 
@@ -55,12 +55,12 @@ cat scripts/*.sql | mysql -u root -p
 
 Update the database connection settings in `config/database.php`:
 
-\`\`\`php
+```php
 $host = 'localhost';
 $dbname = 'school_management';
 $username = 'root';
 $password = 'your_password';
-\`\`\`
+```
 
 ## Database Schema Overview
 
@@ -94,16 +94,16 @@ $password = 'your_password';
 ## Maintenance
 
 ### Backup Database
-\`\`\`bash
+```bash
 mysqldump -u root -p school_management > backup.sql
-\`\`\`
+```
 
 ### Restore Database
-\`\`\`bash
+```bash
 mysql -u root -p school_management < backup.sql
-\`\`\`
+```
 
 ### Reset Database
-\`\`\`bash
+```bash
 mysql -u root -p -e "DROP DATABASE school_management;"
 cat scripts/*.sql | mysql -u root -p

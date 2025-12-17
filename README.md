@@ -32,19 +32,19 @@ A comprehensive school management system built with HTML, Tailwind CSS, JavaScri
 1. **Database Setup**
    - Create a MySQL database named `school_management`
    - Update database credentials in `config/database.php`:
-     \`\`\`php
+     ```php
      define('DB_HOST', 'localhost');
      define('DB_NAME', 'school_management');
      define('DB_USER', 'your_username');
      define('DB_PASS', 'your_password');
-     \`\`\`
+     ```
 
 2. **Import Database Schema**
    - Run the SQL scripts in the following order:
-     \`\`\`bash
+     ```bash
      mysql -u your_username -p school_management < scripts/01_create_tables.sql
      mysql -u your_username -p school_management < scripts/02_seed_data.sql
-     \`\`\`
+     ```
 
 3. **Configure Web Server**
    - Point your web server document root to the project directory
@@ -65,7 +65,7 @@ A comprehensive school management system built with HTML, Tailwind CSS, JavaScri
 
 ## Project Structure
 
-\`\`\`
+```
 school-management/
 ├── api/                    # API endpoints
 │   ├── admin/             # Admin-specific APIs
@@ -95,7 +95,7 @@ school-management/
 │   └── 02_seed_data.sql
 ├── index.php              # Landing/login page
 └── README.md
-\`\`\`
+```
 
 ## Security Features
 

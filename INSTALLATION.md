@@ -5,7 +5,7 @@
 ### Step 1: Copy Files
 1. Copy all project files to: `C:\xampp\htdocs\v0-web-app-build\`
 2. Make sure the folder structure is intact:
-   \`\`\`
+   ```
    v0-web-app-build/
    ├── index.php
    ├── register.php
@@ -15,7 +15,7 @@
    ├── pages/
    ├── scripts/
    └── assets/
-   \`\`\`
+   ```
 
 ### Step 2: Start XAMPP
 1. Open XAMPP Control Panel
@@ -34,12 +34,12 @@
 ### Step 4: Configure Database Connection
 1. Open `config/database.php` in a text editor
 2. Update credentials if needed (default should work for XAMPP):
-   \`\`\`php
+   ```php
    define('DB_HOST', 'localhost');
    define('DB_USER', 'root');
    define('DB_PASS', '');
    define('DB_NAME', 'school_management');
-   \`\`\`
+   ```
 
 ### Step 5: Test Installation
 1. Open browser

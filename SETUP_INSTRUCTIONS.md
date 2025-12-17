@@ -13,7 +13,7 @@
 First, you need to create the database and tables. Follow these steps in order:
 
 #### Option A: Using MySQL Command Line
-\`\`\`bash
+```bash
 # Login to MySQL
 mysql -u root -p
 
@@ -21,7 +21,7 @@ mysql -u root -p
 source scripts/00_create_database.sql
 source scripts/01_create_tables.sql
 source scripts/02_seed_data.sql
-\`\`\`
+```
 
 #### Option B: Using phpMyAdmin
 1. Open phpMyAdmin in your browser
@@ -36,19 +36,19 @@ source scripts/02_seed_data.sql
 
 Edit `config/database.php` if your MySQL settings are different:
 
-\`\`\`php
+```php
 define('DB_HOST', 'localhost');     // Your MySQL host
 define('DB_NAME', 'school_management'); // Database name
 define('DB_USER', 'root');          // Your MySQL username
 define('DB_PASS', '');              // Your MySQL password
-\`\`\`
+```
 
 ### 3. Test Database Connection
 
 Open your browser and navigate to:
-\`\`\`
+```
 http://localhost/your-project-folder/test-connection.php
-\`\`\`
+```
 
 This will verify that:
 - Database connection is working
@@ -58,9 +58,9 @@ This will verify that:
 ### 4. Access the System
 
 Navigate to:
-\`\`\`
+```
 http://localhost/your-project-folder/
-\`\`\`
+```
 
 ## Demo Login Credentials
 
@@ -100,7 +100,7 @@ http://localhost/your-project-folder/
 
 ## File Structure
 
-\`\`\`
+```
 project/
 ├── api/                    # API endpoints
 │   ├── auth/              # Authentication APIs
@@ -129,7 +129,7 @@ project/
 ├── index.php           # Login page
 ├── register.php        # Registration page
 └── test-connection.php # Database test
-\`\`\`
+```
 
 ## Security Notes
 

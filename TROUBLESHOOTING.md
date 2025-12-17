@@ -55,10 +55,10 @@ This will show if your database is properly configured.
 
 ### 7. File Permissions
 If on Linux/Mac, ensure proper permissions:
-\`\`\`bash
+```bash
 chmod 755 -R /path/to/v0-web-app-build
 chmod 644 /path/to/v0-web-app-build/*.php
-\`\`\`
+```
 
 ## Getting Help
 
